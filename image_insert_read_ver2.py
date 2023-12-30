@@ -71,3 +71,4 @@ if __name__ == "__main__":
 	finally:
 		my_db.close()
 # -------------------------------------------------------------------------------------------		
+# amikor 2.read-et nyomok, lefut, s utána megjelenik a kép

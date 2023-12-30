@@ -11,7 +11,7 @@ import os
 my_db = mysql.connector.connect(
 	host = "localhost",
 	user = "root",
-	password = "",
+	password = "Seamusoutside1",
 	database = "db_with_blob")
 
 # Creating the cursor, and then a MySQL table with a BLOB column containing the images  
