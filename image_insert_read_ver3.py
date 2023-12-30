@@ -1,6 +1,4 @@
-# image_insert_read.py - a program that creates a MySQL database 
-# where we can insert, and get images from using a simple navigation menu.
-# First insert a picture, so that next you can open it!
+# In this version I started adding a user interface to the existing program
 
 import mysql.connector
 import os
@@ -12,7 +10,7 @@ from tkinter import Tk, Entry, Label, Button, Canvas, PhotoImage, filedialog, si
 my_db = mysql.connector.connect(
 	host = "localhost",
 	user = "root",
-	password = "Seamusoutside1",
+	password = "",
 	database = "db_with_blob")
 
 # Creating the cursor, and then a MySQL table with a BLOB column containing the images  
@@ -69,8 +67,7 @@ def insert_image():
 	        success_label.config(text="Image insertion successful")
 	        print("Image insertion successful")
 	       
-# Explicitly there is no real reason for an exception yet, so we do get an exception for some reason lets say, but
-# insert_image gets executed anyway
+# Explicitly there is no real reason for an exception yet, so we do get an exception for some reason lets say, but insert_image gets executed anyway
 	except Exception as e:
 		x_image = Image.open("x-mark-16.png")
 		x_image = x_image.resize((20, 20))
@@ -121,7 +118,4 @@ root.mainloop()
 # Cleanup
 my_db.close()
 # -------------------------------------------------------------------------------------------		
-# amikor 2.read-et nyomok, lefut, s utána megjelenik a kép
-# írjunk ki egy zöld pipát, ha sikerült a insert image button, és az ID nevét, és destination foldert
-# 
 
