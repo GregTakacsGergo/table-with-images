@@ -1,8 +1,8 @@
-# In this version I started adding a user interface to the existing program
+# In this version I started adding a user interface 
 
 import mysql.connector
 import os
-import subprocess
+import subprocess     # using this module to open file explorer 
 from PIL import Image, ImageTk
 from tkinter import Tk, Entry, Label, Button, Canvas, PhotoImage, filedialog, simpledialog
 
@@ -19,7 +19,6 @@ my_cursor.execute("CREATE TABLE IF NOT EXISTS Images (image_id INT NOT NULL AUTO
 
 
 # Defining the function to insert the images into the above created table
-# This only inserts the image into the db table!
 def insert_blob(open_file_path):
 	with open(open_file_path, 'rb') as file:
 		binary_data = file.read()
@@ -29,7 +28,7 @@ def insert_blob(open_file_path):
 	inserted_id = my_cursor.lastrowid
 	print(f"Image inserted with ID: {inserted_id}")
 
-# Defining image reader, aka fetch function
+# Defining a function to get the images from the db into our folder
 def fetch_blob(ID):
 	SQL_statement2 = "SELECT * FROM Images WHERE image_id = %s"
 	my_cursor.execute(SQL_statement2, (str(ID), ))
@@ -63,11 +62,9 @@ def insert_image():
 	        check_label = Label(root, image=check_image_tk)
 	        check_label.image = check_image_tk  
 	        check_label.grid(row=0, column=1, padx=(10, 0))  
-
 	        success_label.config(text="Image insertion successful")
-	        print("Image insertion successful")
-	       
-# Explicitly there is no real reason for an exception yet, so we do get an exception for some reason lets say, but insert_image gets executed anyway
+	        print("Image insertion successful")	       
+		    
 	except Exception as e:
 		x_image = Image.open("x-mark-16.png")
 		x_image = x_image.resize((20, 20))
@@ -104,6 +101,9 @@ canvas.grid()
 # Create an Entry widget for image ID input
 image_id_entry = Entry(root)
 
+success_label = Label(root, text="")
+success_label.grid(row=1, column=0, columnspan=2)
+
 # Tkinter buttons
 insert_button = Button(root, text="Insert Image", command=insert_image)
 insert_button.grid(row=0, column=0, padx=(0, 10), pady=10)
@@ -118,4 +118,3 @@ root.mainloop()
 # Cleanup
 my_db.close()
 # -------------------------------------------------------------------------------------------		
-
